@@ -47,10 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Cookable.cs" />
-     <Compile Include="Assets\DraggableRB.cs" />
-     <Compile Include="Assets\DraggableRB_Old.cs" />
      <Compile Include="Assets\Hotplate.cs" />
-     <Compile Include="Assets\draggable.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

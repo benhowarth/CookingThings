@@ -41,6 +41,13 @@ public class Hotplate : MonoBehaviour {
 			}
 		}
 	}
+	void OnCollisionStay(Collision col){
+		if (heatOn) {
+			if (col.gameObject.GetComponent<Cookable> ()) {
+				col.gameObject.GetComponent<Cookable> ().beingCookedAmount = cookSpeed;
+			}
+		}
+	}
 
 	void OnCollisionExit(Collision col){
 		if (col.gameObject.GetComponent<Cookable> ()) {
