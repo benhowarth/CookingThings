@@ -15,6 +15,6 @@ public class FoodManager : MonoBehaviour {
 	}
 
 	void MoreGreen(){
-		Instantiate (green, transform,this);
+		Instantiate (green, transform,this,this);
 	}
 }

@@ -26,6 +26,7 @@ public class toggleSlicer : MonoBehaviour {
 		string drawText="Knife: Disabled";
 		if (ms.enabled) {
 			drawText="Knife: Enabled";
+			GUI.
 		}
 		GUI.Label(new Rect(Screen.width-100, 10, 100, 100), drawText);
 	}
