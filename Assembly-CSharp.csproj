@@ -53,29 +53,56 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BzKovSoft\CharacterSlicerSamples\CharacterSlicerSampleFast.cs" />
-     <Compile Include="Assets\BzKovSoft\CharacterSlicerSamples\EnemyManager.cs" />
-     <Compile Include="Assets\BzKovSoft\CharacterSlicerSamples\IDeadable.cs" />
-     <Compile Include="Assets\BzKovSoft\ObjectSlicerSamples\AdderSliceableAsync.cs" />
-     <Compile Include="Assets\BzKovSoft\ObjectSlicerSamples\BzKnife.cs" />
-     <Compile Include="Assets\BzKovSoft\ObjectSlicerSamples\KnifeSliceableAsync.cs" />
-     <Compile Include="Assets\BzKovSoft\ObjectSlicerSamples\MoveCamera.cs" />
-     <Compile Include="Assets\BzKovSoft\ObjectSlicerSamples\ObjectSlicerSample.cs" />
-     <Compile Include="Assets\BzKovSoft\ObjectSlicerSamples\SampleKnifeSlicer.cs" />
-     <Compile Include="Assets\BzKovSoft\ObjectSlicerSamples\SampleMouseSlicer.cs" />
-     <Compile Include="Assets\Cookable.cs" />
-     <Compile Include="Assets\FoodManager.cs" />
-     <Compile Include="Assets\Hotplate.cs" />
-     <Compile Include="Assets\OutlineEffect\Demo\MaterialSwitcher.cs" />
-     <Compile Include="Assets\OutlineEffect\Demo\OutlineAnimation.cs" />
-     <Compile Include="Assets\OutlineEffect\Demo\Rotate.cs" />
-     <Compile Include="Assets\OutlineEffect\Demo\Toggle.cs" />
-     <Compile Include="Assets\OutlineEffect\LinkedSet.cs" />
-     <Compile Include="Assets\OutlineEffect\Outline.cs" />
-     <Compile Include="Assets\OutlineEffect\OutlineEffect.cs" />
-     <Compile Include="Assets\toggleSlicer.cs" />
-     <None Include="Assets\OutlineEffect\Resources\OutlineShader.shader" />
-     <None Include="Assets\OutlineEffect\Resources\OutlineBufferShader.shader" />
+     <Compile Include="Assets\Cafeteria\Citizen\CitizenInfo.cs" />
+     <Compile Include="Assets\Cafeteria\Citizen\CitizenScript.cs" />
+     <Compile Include="Assets\Cafeteria\Citizen\eyeRandomiser.cs" />
+     <Compile Include="Assets\Cafeteria\Citizen\planeTextureChooser.cs" />
+     <Compile Include="Assets\Cafeteria\Cookable.cs" />
+     <Compile Include="Assets\Cafeteria\FoodManager.cs" />
+     <Compile Include="Assets\Cafeteria\Hotplate.cs" />
+     <Compile Include="Assets\Cafeteria\Ingredient.cs" />
+     <Compile Include="Assets\Cafeteria\InventoryButton.cs" />
+     <Compile Include="Assets\Cafeteria\Pan.cs" />
+     <Compile Include="Assets\Cafeteria\toggleSlicer.cs" />
+     <Compile Include="Assets\IngredientInfo.cs" />
+     <Compile Include="Assets\Not My Assets\BzKovSoft\CharacterSlicerSamples\CharacterSlicerSampleFast.cs" />
+     <Compile Include="Assets\Not My Assets\BzKovSoft\CharacterSlicerSamples\EnemyManager.cs" />
+     <Compile Include="Assets\Not My Assets\BzKovSoft\CharacterSlicerSamples\IDeadable.cs" />
+     <Compile Include="Assets\Not My Assets\BzKovSoft\ObjectSlicerSamples\AdderSliceableAsync.cs" />
+     <Compile Include="Assets\Not My Assets\BzKovSoft\ObjectSlicerSamples\BzKnife.cs" />
+     <Compile Include="Assets\Not My Assets\BzKovSoft\ObjectSlicerSamples\KnifeSliceableAsync.cs" />
+     <Compile Include="Assets\Not My Assets\BzKovSoft\ObjectSlicerSamples\MoveCamera.cs" />
+     <Compile Include="Assets\Not My Assets\BzKovSoft\ObjectSlicerSamples\ObjectSlicerSample.cs" />
+     <Compile Include="Assets\Not My Assets\BzKovSoft\ObjectSlicerSamples\SampleKnifeSlicer.cs" />
+     <Compile Include="Assets\Not My Assets\BzKovSoft\ObjectSlicerSamples\SampleMouseSlicer.cs" />
+     <Compile Include="Assets\Not My Assets\LocalNavMeshBuilder.cs" />
+     <Compile Include="Assets\Not My Assets\NavMeshSourceTag.cs" />
+     <Compile Include="Assets\Not My Assets\OutlineEffect\Demo\MaterialSwitcher.cs" />
+     <Compile Include="Assets\Not My Assets\OutlineEffect\Demo\OutlineAnimation.cs" />
+     <Compile Include="Assets\Not My Assets\OutlineEffect\Demo\Rotate.cs" />
+     <Compile Include="Assets\Not My Assets\OutlineEffect\Demo\Toggle.cs" />
+     <Compile Include="Assets\Not My Assets\OutlineEffect\LinkedSet.cs" />
+     <Compile Include="Assets\Not My Assets\OutlineEffect\Outline.cs" />
+     <Compile Include="Assets\Not My Assets\OutlineEffect\OutlineEffect.cs" />
+     <Compile Include="Assets\Not My Assets\Standard Assets\Utility\DragRigidbody.cs" />
+     <Compile Include="Assets\Outside\Crate.cs" />
+     <Compile Include="Assets\Outside\DeleteProp.cs" />
+     <Compile Include="Assets\Outside\deleteWallOnGen.cs" />
+     <Compile Include="Assets\Outside\EnemyAI.cs" />
+     <Compile Include="Assets\Outside\enemyNavMeshTest.cs" />
+     <Compile Include="Assets\Outside\EnemyVision.cs" />
+     <Compile Include="Assets\Outside\FoodPickup.cs" />
+     <Compile Include="Assets\Outside\hideWall.cs" />
+     <Compile Include="Assets\Outside\KnifeAttack.cs" />
+     <Compile Include="Assets\Outside\particleDestroyAfterPlay.cs" />
+     <Compile Include="Assets\Outside\PickupManager.cs" />
+     <Compile Include="Assets\Outside\PlayerMovement.cs" />
+     <Compile Include="Assets\Outside\Sound.cs" />
+     <Compile Include="Assets\Outside\SoundManager.cs" />
+     <Compile Include="Assets\Outside\WorldGen.cs" />
+     <None Include="Assets\Cafeteria\Citizen\names.txt" />
+     <None Include="Assets\Not My Assets\OutlineEffect\Resources\OutlineShader.shader" />
+     <None Include="Assets\Not My Assets\OutlineEffect\Resources\OutlineBufferShader.shader" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Unity5/Projects/CookingThings/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -286,14 +313,14 @@
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
+ <Reference Include="ObjectSlicer">
+ <HintPath>C:/Unity5/Projects/CookingThings/Assets/Not My Assets/BzKovSoft/Plugins/ObjectSlicer.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>C:/Users/Ben/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>C:/Users/Ben/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="ObjectSlicer">
- <HintPath>C:/Unity5/Projects/CookingThings/Assets/BzKovSoft/Plugins/ObjectSlicer.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
@@ -322,10 +349,6 @@
  <Reference Include="Boo.Lang">
  <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{449752FE-2AB5-7DED-2F0D-F3E53341CA65}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

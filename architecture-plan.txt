@@ -1,0 +1,86 @@
+heat.cs
+	//if not a heat source, then 0
+	//if is a heat source then  is the amount of cookedness per update
+	float heatsourcetemperature
+	
+	//if transfers heat through it
+	bool recievesHeat
+	//amount to be currently trnsferred
+	float recievedHeat
+	
+	
+	bool cookable
+	//starts at amount of cookedness required to cook it
+	//decrememnted by heat until 0, when cooked
+	float cookHP
+	//amount of cookedness under 0 until , e.g. -100
+	float burntHP
+	
+	//true if cookedHP>burntHP and <=0
+	bool getCooked()
+	//true if cookedHP<=burntHP
+	bool getBurnt()
+	
+	//decreases cookhp by cookAmount
+	void cookBy(float cookAmount)
+	
+ingredient.cs
+	//container for ingredient info
+	Ingredient
+		string name
+		bool cooked
+		bool burnt
+		bool chopped
+		
+
+	//returns Ingredient object for recipe analysis
+	//checks heat.cs and updates if cooked or burnt
+	Ingredient getIngredientInfo()
+
+plate.cs
+	//a storage object for the collection of ingredients on the plate and their condition
+	Dish
+		//list of components
+		Ingredient[] commponents
+	
+	//for getting dish variable
+	Dish getDish()
+	
+	//for checking whats on the plate
+	void refreshDish()
+	
+	
+foodmanager.cs
+	
+	//Class for storing info on each recipe
+	Recipe
+		//recipe name, id is it's index in recipes variable below
+		string name
+		
+		//checks dish against recipe conditions
+		//custom function for each different recipe
+		bool doesDishQualify()
+	
+	//list of all possible Recipes
+	Recipe[] recipes
+	//returned if no recipe can be matched to a dish when queried, e.g. it's name displayed is "Something?"
+	Recipe nullRecipe
+	
+	
+	//returns number of ingredient that match query object in dish
+	//queryObject could be {name:"meatball"} or {name:"cockroach",cooked:true}
+	int getNummberOfIngredientsInDish(Object queryObject,Dish dish)
+	
+	
+	//analyse the plate using getDish and checking all the conditions
+	//return first recipe it satisfies
+	//else return nullRecipe
+	Recipe getRecipe(GameObject plate)
+	
+	GameObjects[] ingredients
+	
+	void spawnIngredient(int ingredientId)
+	
+		
+		
+		

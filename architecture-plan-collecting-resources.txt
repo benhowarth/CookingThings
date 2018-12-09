@@ -1,0 +1,23 @@
+gamemanager.cs
+
+	//atores tile ids
+	int[,] tiles
+	
+	//generates a new level
+	//1) populates tiles
+	//2) run updateMap()
+	//3) run placeEnemies(randomNumber)
+	void generateMap()
+	
+	//deletes all tile gameobjects and instantiates new ones according to tiles
+	void updateMap()
+	
+	//place number of enemies specified (enemyNo) in level
+	void placeEnemies(int enemyNo)
+	
+player.cs
+	float hp
+	
+
+enemy.cs
+	float hp
