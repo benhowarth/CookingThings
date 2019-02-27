@@ -12,8 +12,8 @@ public class planeTextureChooser : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		randomiseTexture ();
-		UpdateTexture ();
+		//randomiseTexture ();
+		//UpdateTexture ();
 	}
 
 	public void randomiseTexture(){

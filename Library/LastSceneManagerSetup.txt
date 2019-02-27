@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Cafeteria.unity
+- path: Assets/Outside.unity
   isLoaded: 1
   isActive: 1

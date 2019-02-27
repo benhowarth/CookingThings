@@ -29,10 +29,13 @@ public class toggleSlicer : MonoBehaviour {
 			Ray camRay=Camera.main.ScreenPointToRay(mPos);
 			RaycastHit hit;
 			if(Physics.Raycast(camRay,out hit)){
-				knifePlane.transform.position=new Vector3(hit.point.x,3.5f,hit.point.z);
+				knifePlane.transform.position=new Vector3(hit.point.x,hit.point.y+2.5f,hit.point.z);
 			}
 			if(Input.GetMouseButton(0)){
 				//particle
+				//transform.Find("KnifePlane/KnifeParticleBig").GetComponent<ParticleSystem>().Simulate(0,false,true);
+				
+				transform.Find("KnifePlane/KnifeParticleBig").GetComponent<ParticleSystem>().Play();
 			}
 		}
 	}

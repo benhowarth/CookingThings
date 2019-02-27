@@ -60,7 +60,7 @@ namespace BzKovSoft.ObjectSlicerSamples
 
 		void OnGUI()
 		{
-			GUI.Label(new Rect(10, 10, 2000, 2000), drawText);
+			//GUI.Label(new Rect(10, 10, 2000, 2000), drawText);
 		}
 
 		// DTO that we pass to slicer and then receive back

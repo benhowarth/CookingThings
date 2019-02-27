@@ -9,6 +9,7 @@ public class KnifeAttack : MonoBehaviour {
 	public Material attackMat;
 	public GameObject KnifeParticle;
 	public GameObject SoundManager;
+	public Animator anim;
 	// Use this for initialization
 	void Start () {
 		GetComponent<Collider>().enabled=false;
@@ -22,6 +23,7 @@ public class KnifeAttack : MonoBehaviour {
 			GetComponent<Collider>().enabled=true;
 			Instantiate(KnifeParticle,transform);
 			SoundManager.GetComponent<SoundManager>().newSound(transform);
+			anim.Play("attack1(WeaponOneHand)");
 		} else {
 			if(attackTimer>0){
 				attackTimer=attackTimer-1;

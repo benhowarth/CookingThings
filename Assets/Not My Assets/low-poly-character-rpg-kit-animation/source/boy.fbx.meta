@@ -1,0 +1,287 @@
+fileFormatVersion: 2
+guid: b033d149a1f26464a990e8cf9a0f5cc7
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: arrow
+    100002: arrow_02
+    100004: Ball_L
+    100006: Ball_R
+    100008: bow
+    100010: bow_03
+    100012: bow_H1
+    100014: bow_H2
+    100016: bow_L1
+    100018: bow_L2
+    100020: //RootNode
+    100022: Calf_L
+    100024: Calf_R
+    100026: Clavicle_L
+    100028: Clavicle_R
+    100030: Foot_L
+    100032: Foot_R
+    100034: Hand_L
+    100036: Hand_R
+    100038: Head
+    100040: Index_01_L
+    100042: Index_01_R
+    100044: Index_02_L
+    100046: Index_02_R
+    100048: LowerArm_L
+    100050: LowerArm_R
+    100052: Neck_01
+    100054: One-handed Sword
+    100056: One_Handed_Weapon_L
+    100058: Pelvis
+    100060: Plane
+    100062: quiver
+    100064: quiver_02
+    100066: Root
+    100068: rope
+    100070: RPG
+    100072: RPG_Boy
+    100074: shield
+    100076: shield_02
+    100078: Spine_01
+    100080: Spine_02
+    100082: Spine_03
+    100084: stick
+    100086: stick_02
+    100088: Thigh_L
+    100090: Thigh_R
+    100092: Thumb_01_L
+    100094: Thumb_01_R
+    100096: Thumb_02_L
+    100098: Thumb_02_R
+    100100: Two-handed Sword
+    100102: Two_Handed_Weapon
+    100104: UpperArm_L
+    100106: UpperArm_R
+    400000: arrow
+    400002: arrow_02
+    400004: Ball_L
+    400006: Ball_R
+    400008: bow
+    400010: bow_03
+    400012: bow_H1
+    400014: bow_H2
+    400016: bow_L1
+    400018: bow_L2
+    400020: //RootNode
+    400022: Calf_L
+    400024: Calf_R
+    400026: Clavicle_L
+    400028: Clavicle_R
+    400030: Foot_L
+    400032: Foot_R
+    400034: Hand_L
+    400036: Hand_R
+    400038: Head
+    400040: Index_01_L
+    400042: Index_01_R
+    400044: Index_02_L
+    400046: Index_02_R
+    400048: LowerArm_L
+    400050: LowerArm_R
+    400052: Neck_01
+    400054: One-handed Sword
+    400056: One_Handed_Weapon_L
+    400058: Pelvis
+    400060: Plane
+    400062: quiver
+    400064: quiver_02
+    400066: Root
+    400068: rope
+    400070: RPG
+    400072: RPG_Boy
+    400074: shield
+    400076: shield_02
+    400078: Spine_01
+    400080: Spine_02
+    400082: Spine_03
+    400084: stick
+    400086: stick_02
+    400088: Thigh_L
+    400090: Thigh_R
+    400092: Thumb_01_L
+    400094: Thumb_01_R
+    400096: Thumb_02_L
+    400098: Thumb_02_R
+    400100: Two-handed Sword
+    400102: Two_Handed_Weapon
+    400104: UpperArm_L
+    400106: UpperArm_R
+    2100000: texture
+    2100002: weapon
+    2100004: fond
+    2300000: Plane
+    3300000: Plane
+    4300000: RPG_Boy
+    4300002: One-handed Sword
+    4300004: shield_02
+    4300006: Two-handed Sword
+    4300008: quiver_02
+    4300010: arrow_02
+    4300012: stick_02
+    4300014: bow_03
+    4300016: Plane
+    7400000: idle(WeaponOneHand)
+    7400002: attack2(WeaponOneHand)
+    7400004: attack1(WeaponOneHand)
+    7400006: stow(WeaponOneHand)
+    7400008: idle
+    7400010: run
+    7400012: interact
+    7400014: jump_start(WeaponOneHand)
+    7400016: death
+    7400018: death(WeaponOneHand)
+    7400020: hit(WeaponOneHand)
+    7400022: fall(WeaponOneHand)
+    7400024: reception(WeaponOneHand)
+    7400026: jump_start
+    7400028: fall
+    7400030: reception
+    7400032: run(WeaponOneHand)
+    7400034: take(WeaponOneHand)
+    7400036: hit
+    7400038: walk(WeaponOneHand)
+    7400040: walk
+    7400042: catch
+    7400044: put
+    7400046: throw
+    7400048: push
+    7400050: pull
+    7400052: walk(take)
+    7400054: idle(take)
+    7400056: attack1(shield)
+    7400058: attack2(shield)
+    7400060: death(shield)
+    7400062: fall(shield)
+    7400064: jump_start(shield)
+    7400066: reception(shield)
+    7400068: hit(shield)
+    7400070: idle(shield)
+    7400072: guard
+    7400074: hit_guard
+    7400076: run(shield)
+    7400078: walk(shield)
+    7400080: stow(shield)
+    7400082: take(shield)
+    7400084: idle(WeaponTwoHand)
+    7400086: attack1(WeaponTwoHand)
+    7400088: attack2(WeaponTwoHand)
+    7400090: death(WeaponTwoHand)
+    7400092: fall(WeaponTwoHand)
+    7400094: hit(WeaponTwoHand)
+    7400096: jump_start(WeaponTwoHand)
+    7400098: reception(WeaponTwoHand)
+    7400100: run(WeaponTwoHand)
+    7400102: walk(WeaponTwoHand)
+    7400104: stow(WeaponTwoHand)
+    7400106: take(WeaponTwoHand)
+    7400108: idle(bow)
+    7400110: idle(armed_bow)
+    7400112: bow_load
+    7400114: fire_bow
+    7400116: death(bow)
+    7400118: fall(bow)
+    7400120: hit(bow)
+    7400122: jump_start(bow)
+    7400124: reception(bow)
+    7400126: run(bow)
+    7400128: walk(bow)
+    7400130: take(bow)
+    7400132: stow(bow)
+    7400134: idle(stick)
+    7400136: attack1(stick)
+    9500000: //RootNode
+    13700000: arrow_02
+    13700002: bow_03
+    13700004: One-handed Sword
+    13700006: quiver_02
+    13700008: RPG_Boy
+    13700010: shield_02
+    13700012: stick_02
+    13700014: Two-handed Sword
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

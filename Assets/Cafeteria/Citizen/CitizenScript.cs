@@ -4,46 +4,56 @@ using UnityEngine;
 
 public class CitizenScript : MonoBehaviour {
 	public CitizenInfo info;
-	public TextAsset namesTxt;
-	private string[] names;
-	public string citizenName="";
-	private char[] alphabet;
+	public CitizenManager citizenManager;
+
+	public string citizenName="name";
+
+
+
+	public MeshRenderer headMeshRenderer;
+	public GameObject eyes;
+	public GameObject eyeL;
+	public GameObject eyeR;
+	public MeshRenderer mouthMeshRenderer;
+	public MeshRenderer bodyMeshRenderer;
+
+	public TextMesh nameTagTextMesh;
+
 	// Use this for initialization
 	void Start () {
-		alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-		randomise ();
+		//randomise ();
+		updateFromInfo ();
+	}
+
+	public void updateFromInfo(){
+		citizenName = info.name;
+
+
+		headMeshRenderer.material.color = info.headColor;
+		headMeshRenderer.material.SetTexture("_MainTex",citizenManager.headTextures[info.headTexture]);
+
+
+		bodyMeshRenderer.material.color = info.bodyColor;
+		bodyMeshRenderer.material.SetTexture("_MainTex",citizenManager.bodyTextures[info.bodyTexture]);
+
+		Vector3 eyesPos = eyes.transform.localPosition;
+		eyes.transform.localPosition=new Vector3(eyesPos.x,eyesPos.y,info.eyeSpacingY);
+		Vector3 eyePos = eyeL.transform.localPosition;
+		eyeL.transform.localPosition = new Vector3 (info.eyeSpacingX, eyePos.y, eyePos.z);
+		eyeR.transform.localPosition = new Vector3 (-info.eyeSpacingX, eyePos.y, eyePos.z);
+
+		
+		mouthMeshRenderer.material.color = info.mouthColor;
+		mouthMeshRenderer.material.SetTexture("_MainTex",citizenManager.mouthTextures[info.mouthTexture]);
+		
+		nameTagTextMesh.text = info.name;
 	}
 
 
-	public void randomise(){
-		if (namesTxt != null) {
-			names=(namesTxt.text.Split('\n'));
-			citizenName = names[Random.Range (0, names.Length)]+" "+alphabet[Random.Range(0,alphabet.Length)]+".";
-		}
-		//randomise stuff
-		//head
-		transform.Find ("Head").gameObject.GetComponent<planeTextureChooser> ().randomiseTexture ();
-		transform.Find ("Head").gameObject.GetComponent<planeTextureChooser> ().UpdateTexture();
-		//eyes
-		transform.Find ("Head/Eyes").gameObject.GetComponent<eyeRandomiser> ().randomise();
-		transform.Find ("Head/Eyes").gameObject.GetComponent<eyeRandomiser> ().UpdateEyes();
-		//mouth
-		transform.Find ("Head/Eyes/Mouth").gameObject.GetComponent<planeTextureChooser> ().randomiseTexture ();
-		transform.Find ("Head/Eyes/Mouth").gameObject.GetComponent<planeTextureChooser> ().UpdateTexture ();
-		//body
-		transform.Find ("Body").gameObject.GetComponent<planeTextureChooser> ().randomiseTexture ();
-		transform.Find ("Body").gameObject.GetComponent<planeTextureChooser> ().UpdateTexture ();
-		UpdateTag ();
-	}
 
-	void UpdateTag(){
-		transform.Find("Body/NameTag").gameObject.GetComponent<TextMesh> ().text = citizenName;
-	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.R)) {
-			randomise();
-		}		
+
 	}
 }

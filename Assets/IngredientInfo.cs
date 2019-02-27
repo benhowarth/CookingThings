@@ -10,4 +10,5 @@ public class IngredientInfo : ScriptableObject {
 	public float disease;
 	public float vitamins;
 	public float energy;
+	public List<string> tags;
 }

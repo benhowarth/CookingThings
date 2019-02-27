@@ -1,14 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Cafeteria\Citizen\CitizenScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Outside\PlayerMovement.cs">
     <Files>
-      <File FileName="Assets\Not My Assets\BzKovSoft\ObjectSlicerSamples\ObjectSlicerSample.cs" Line="11" Column="33" />
-      <File FileName="Assets\IngredientInfo.cs" Line="4" Column="1" />
-      <File FileName="Assets\Cafeteria\FoodManager.cs" Line="149" Column="3" />
-      <File FileName="Assets\Outside\Crate.cs" Line="24" Column="34" />
-      <File FileName="Assets\Outside\WorldGen.cs" Line="188" Column="5" />
-      <File FileName="Assets\Cafeteria\Citizen\CitizenInfo.cs" Line="22" Column="1" />
-      <File FileName="Assets\Cafeteria\Citizen\CitizenScript.cs" Line="16" Column="1" />
+      <File FileName="Assets\FieldOfView.cs" Line="53" Column="3" />
+      <File FileName="Assets\WorldGen2.cs" Line="214" Column="11" />
+      <File FileName="Assets\Outside\hideWall.cs" Line="1" Column="1" />
+      <File FileName="Assets\Outside\EnemyVision.cs" Line="1" Column="1" />
+      <File FileName="Assets\Outside\EnemyAI.cs" Line="166" Column="140" />
+      <File FileName="Assets\Outside\PlayerMovement.cs" Line="124" Column="4" />
+      <File FileName="Assets\Outside\Sound.cs" Line="28" Column="30" />
+      <File FileName="Assets\Outside\SoundManager.cs" Line="23" Column="51" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

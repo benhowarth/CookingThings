@@ -23,24 +23,24 @@ public class EnemyVision : MonoBehaviour {
 					//Debug.Log ("hitCollider"+i+":"+hitColliders[i].gameObject.name);
 					//if (hitColliders [i].gameObject.name == "Player" && !transform.parent.GetComponent<EnemyAI> ().seenPlayer) {
 					if (hitColliders [i].gameObject.tag == "Player") {
-						RaycastHit hit;
+						//RaycastHit hit;
 						
-						Ray ray = new Ray(transform.position,Player.transform.position-transform.position);
-						if(Physics.Raycast(ray, out hit,Mathf.Infinity,LayerMask.GetMask("Player", "Wall"))){
-							if(hit.transform.gameObject.tag=="Player"){
+						//Ray ray = new Ray(transform.position,Player.transform.position-transform.position);
+						//if(Physics.Raycast(ray, out hit,20f,LayerMask.GetMask("Player", "Wall"))){
+						//	if(hit.transform.gameObject.tag=="Player"){
 							playerInVision=true;
 							Debug.Log ("Seen " + hitColliders [i] + "!");
 							transform.parent.GetComponent<EnemyAI> ().seenPlayer = true;
 							transform.parent.GetComponent<EnemyAI> ().agent.SetDestination(hitColliders[i].gameObject.transform.position);
-							}
-						}
+						//	}
+						//}
 					}
 				}
 			}
 			if(!playerInVision){
 				transform.parent.GetComponent<EnemyAI> ().seenPlayer = false;
 			}
-		}
+		}else{}
 	}
 	void OnCollisionEnter(Collision col){
 		Debug.Log ("vision coll");

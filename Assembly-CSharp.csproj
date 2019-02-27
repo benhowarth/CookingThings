@@ -64,6 +64,9 @@
      <Compile Include="Assets\Cafeteria\InventoryButton.cs" />
      <Compile Include="Assets\Cafeteria\Pan.cs" />
      <Compile Include="Assets\Cafeteria\toggleSlicer.cs" />
+     <Compile Include="Assets\CitizenManager.cs" />
+     <Compile Include="Assets\DinnerBell.cs" />
+     <Compile Include="Assets\FieldOfView.cs" />
      <Compile Include="Assets\IngredientInfo.cs" />
      <Compile Include="Assets\Not My Assets\BzKovSoft\CharacterSlicerSamples\CharacterSlicerSampleFast.cs" />
      <Compile Include="Assets\Not My Assets\BzKovSoft\CharacterSlicerSamples\EnemyManager.cs" />
@@ -100,9 +103,12 @@
      <Compile Include="Assets\Outside\Sound.cs" />
      <Compile Include="Assets\Outside\SoundManager.cs" />
      <Compile Include="Assets\Outside\WorldGen.cs" />
+     <Compile Include="Assets\SceneChanger.cs" />
+     <Compile Include="Assets\WorldGen2.cs" />
      <None Include="Assets\Cafeteria\Citizen\names.txt" />
      <None Include="Assets\Not My Assets\OutlineEffect\Resources\OutlineShader.shader" />
      <None Include="Assets\Not My Assets\OutlineEffect\Resources\OutlineBufferShader.shader" />
+     <None Include="Assets\Objs\Creds.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Unity5/Projects/CookingThings/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

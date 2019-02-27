@@ -6,7 +6,7 @@ public class Sound : MonoBehaviour {
 	
 	
 	public float radiusMax=10.0f;
-	public float timerMax=50.0f;
+	public float timerMax=3.0f;
 	public float timer;
 	public float radius;
 
@@ -25,7 +25,7 @@ public class Sound : MonoBehaviour {
 		}else{
 			radius = (timer / timerMax) * radiusMax;
 			transform.localScale=new Vector3(radius,radius,radius);
-			timer=timer+1.0f;
+			timer=timer+Time.deltaTime;
 		}
 	}
 }
