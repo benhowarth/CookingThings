@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FoodPickup : MonoBehaviour {
-	private bool toolTipOn=false;
+	public bool toolTipOn;
 	private Camera cam;
 	public IngredientInfo info;
 	// Use this for initialization
@@ -14,16 +14,7 @@ public class FoodPickup : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 mPos = Input.mousePosition;
-		RaycastHit hit;
-		Ray camRay = cam.ScreenPointToRay (mPos);
-		if(Physics.Raycast(camRay, out hit,Mathf.Infinity)){
-			if(hit.transform==transform){
-				toolTipOn=true;
-			}else{
-				toolTipOn=false;
-			}
-		}
+
 	}
 
 	public void Pickup(){
@@ -42,7 +33,7 @@ public class FoodPickup : MonoBehaviour {
 	void OnGUI(){
 		if (toolTipOn) {
 			Vector3 mousePos=Input.mousePosition;
-			GUI.Label (new Rect(mousePos.x,mousePos.y,300,100),info.name+"\nEnergy:"+info.energy+"\nVitamins:"+info.vitamins+"\nDisease:"+info.vitamins);
+			//GUI.Label (new Rect(mousePos.x,Screen.height-mousePos.y,300,100),info.name+"\nEnergy:"+info.energy+"\nVitamins:"+info.vitamins+"\nDisease:"+info.vitamins);
 		}
 	}
 }

@@ -9,48 +9,46 @@ public class PlayerMovement : MonoBehaviour {
 	public float maxVelocity;
 	private Vector3 target;
 	public float hp=100.0f;
+	private float hpMax=100.0f;
 	public bool dead;
-	private Color cubeColor;
 	private float healthRegenGap;
 	public float healthRegenGapMax=50.0f;
 	public GameObject SoundManager;
+	public Collider playerCol;
+	public GameObject playerModel;
 	public Animator anim;
+	public GameObject knifeObj;
 	public Collider knifeCol;
 	private Rigidbody rb;
-	public GameObject HPTextObj;
-	private Text HPText;
+	public Image HPBar;
 	public float footStepTimer;
 	public float footStepTimerMax=0.5f;
+	public bool hidden=false;
+	public bool canUnhide=false;
+	public GameObject currentLocker;
+	public GameObject foodPickupHoverOver;
 
 	// Use this for initialization
 	void Start () {
 		target=transform.position;
 		//target=new Vector3(transform.position.x+10.0f,transform.position.y,transform.position.z);
-		hp = 100.0f;
-		cubeColor = Color.green;
+		hp = hpMax;
 		dead = false;
 		healthRegenGap = 0.0f;
 		
 		rb = GetComponent<Rigidbody> ();
-		HPText=HPTextObj.GetComponent<Text> ();
-		HPText.text = "HP: " + Mathf.Floor (hp)+"%";
+		HPBar.fillAmount = hp / hpMax;
 
 		footStepTimer = -1;
+		anim.SetBool ("dead",false);
+
+		foodPickupHoverOver = null;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		cubeColor = Color.Lerp (Color.red, Color.green, hp / 100.0f);
-		transform.Find ("PlayerModel/Cube").GetComponent<Renderer> ().material.shader = Shader.Find ("Standard");
-		transform.Find ("PlayerModel/Cube").GetComponent<Renderer> ().material.color = cubeColor;
 
-		
-		if (hp == 0) {
-			dead=true;
-		} else {
-
-
-
+		if (hp != 0) {
 			Vector3 mPos = Input.mousePosition;
 			RaycastHit hit;
 			Ray camRay = cam.ScreenPointToRay (mPos);
@@ -58,14 +56,17 @@ public class PlayerMovement : MonoBehaviour {
 				Vector3 aimPos = new Vector3 (hit.point.x, transform.Find ("PlayerModel").position.y, hit.point.z);
 				transform.Find ("PlayerModel").LookAt (aimPos);
 				if (hit.transform.gameObject.tag == "foodPickup") {
-					if (Input.GetKey (KeyCode.E)) {
+					if(foodPickupHoverOver==null || foodPickupHoverOver!=hit.transform.gameObject){
+						foodPickupHoverOver=hit.transform.gameObject;
+					}
+					if (Input.GetMouseButtonDown (0) || Input.GetKey (KeyCode.E)) {
 						hit.transform.gameObject.GetComponent<FoodPickup> ().Pickup ();
 					}
-					if (Input.GetMouseButtonDown (0)) {
-
-					}
+				}else{
+					foodPickupHoverOver=null;
 				}
 			}
+
 
 			if (healthRegenGap == 0.0f) {
 				if (hp + 0.1f >= 100.0f) {
@@ -91,8 +92,11 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		if (dead) {
-			anim.Play ("death");
+		if (hidden) {
+			if (canUnhide && (Input.GetKey (KeyCode.A)||Input.GetKey (KeyCode.D)||Input.GetKey (KeyCode.W)||Input.GetKey (KeyCode.S))) {
+				Debug.Log("Try to unhide");
+				unhide ();
+			}
 		} else {
 			//movement
 			float runFactor = 1.0f;
@@ -115,32 +119,37 @@ public class PlayerMovement : MonoBehaviour {
 					rb.AddForce (Vector3.back * speed * runFactor);
 				}
 				if (Input.GetKeyDown (KeyCode.Q)) {
-					SoundManager.GetComponent<SoundManager> ().newSound (transform);
+					//SoundManager.GetComponent<SoundManager> ().newSound (transform);
+					if(hidden){unhide();}else{hide ();}
 				}
 				if (Input.GetKey (KeyCode.O)) {
 					hp = 0;
 				}
 			}
 
-			if (knifeCol.enabled) {
-				anim.Play ("attack1(WeaponOneHand)");
-			} else {
+			if (!knifeCol.enabled && !dead) {
 				if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.S)) {
 					if(footStepTimer==-1){footStepTimer=footStepTimerMax;}
 					if (Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift)) {
-						anim.Play ("run");
+						//anim.Play ("run");
+						anim.SetBool("walking",false);
+						anim.SetBool("running",true);
 						footStepTimer+=Time.deltaTime*1.5f;
 					} else {
-						anim.Play ("walk");
+						//anim.Play ("walk");
+						anim.SetBool("running",false);
+						anim.SetBool("walking",true);
 						footStepTimer+=Time.deltaTime;
 					}
 					if(footStepTimer>=footStepTimerMax){
 						footStepTimer=0;
-						SoundManager.GetComponent<SoundManager>().newSound(transform,2f*runFactor,0.7f);
+						SoundManager.GetComponent<SoundManager>().newSound(transform,0.2f*runFactor,0.7f);
 					}
 				} else {
 					footStepTimer=-1;
-					anim.Play ("idle");
+					anim.SetBool("running",false);
+					anim.SetBool("walking",false);
+					//anim.Play ("idle");
 
 					//anim.Play("death");
 				}
@@ -154,18 +163,55 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
+	void enableUnhiding(){
+		canUnhide = true;
+	}
+
+	public void hide(){
+		anim.SetBool ("walking", false);
+		anim.SetBool ("running", false);
+		Invoke ("enableUnhiding", 0.8f);
+		hidden = true;
+		//playerModel.SetActive(false);
+		playerCol.enabled = false;
+		rb.isKinematic = true;
+		knifeObj.SetActive(false);
+	}
+
+	public void unhide(){
+		hidden = false;
+		canUnhide = false;
+		//playerModel.SetActive(true);
+		playerCol.enabled = true;
+		rb.isKinematic = false;
+		knifeObj.SetActive(true);
+		currentLocker.GetComponent<Locker>().Open();
+		currentLocker.GetComponent<Locker> ().DisableUntil (1.3f);
+		currentLocker = null;
+	}
+
 	public void takeDamage(float damage){
+		//anim.Play ("hit");
+		anim.SetTrigger ("hit");
 		if(hp-damage<=0.0f){
 			hp=0;
 			dead=true;
+			anim.Play ("death");
+			anim.SetBool ("dead",true);
+			anim.SetTrigger ("dead");
+			knifeObj.SetActive(false);
+			playerCol.enabled = false;
 		}else{
 			hp=hp-damage;
 			healthRegenGap=healthRegenGapMax;
 		}
-		HPText.text = "HP: " + Mathf.Ceil(hp)+"%";
+		HPBar.fillAmount = hp / hpMax;
 
 	}
 
+	void OnTriggerEnter(Collider col){
+		//Debug.Log ("player enter trig"+col);
+	}
 	void OnCollisionEnter(Collision col){
 		//Debug.Log ("player enter coll"+col);
 	}

@@ -21,17 +21,19 @@ public class Crate : MonoBehaviour {
 		//Debug.Log (col);
 		if (col.gameObject.name=="Knife") {
 			GetComponent<Collider> ().enabled = false;
+			GetComponent<Rigidbody>().useGravity=false;
 			int children=transform.childCount;
 			for(int i=0;i<children;i++){
-				Vector3 knifeHit=col.gameObject.transform.position-transform.GetChild(i).transform.position;
-				transform.GetChild(i).GetComponent<Collider>().enabled=true;
-				transform.GetChild(i).GetComponent<Rigidbody>().useGravity=true;
-				transform.GetChild(i).GetComponent<Rigidbody>().isKinematic=false;
-				transform.GetChild(i).GetComponent<Rigidbody>().AddForce(10f*-knifeHit);
-
+				Transform piece=transform.GetChild(i);
+				Vector3 knifeHit=piece.position-col.gameObject.transform.position;
+				piece.GetComponent<Collider>().enabled=true;
+				piece.GetComponent<Rigidbody>().useGravity=true;
+				piece.GetComponent<Rigidbody>().isKinematic=false;
+				piece.GetComponent<Rigidbody>().AddForce(knifeHit*10f);
+				piece.GetComponent<DestroyAfter>().ActivateDestructionTimer();
 			}
 			Instantiate (food, transform);
-			SoundManager.GetComponent<SoundManager>().newSound(transform);
+			SoundManager.GetComponent<SoundManager>().newSound(transform,0.5f,0.9f);
 		}
 	}
 }

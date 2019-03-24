@@ -14,11 +14,13 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	public void newSound(Transform soundTransform){
-		GameObject newSound=Instantiate(soundObj,soundTransform.position,Quaternion.Euler (0,0,0));
+		Vector3 pos=soundTransform.position;
+		pos.y += 1;
+		Instantiate(soundObj,pos,Quaternion.Euler (0,0,0));
 	}
 
 	public void newSound(Transform soundTransform,float maxRad,float maxTimer){
-		GameObject newSound=Instantiate(soundObj,soundTransform.position,Quaternion.Euler (0,0,0));
+		GameObject newSound=Instantiate(soundObj,soundTransform.position,Quaternion.Euler (0,180,0));
 		newSound.GetComponent<Sound>().radiusMax=maxRad;
 		newSound.GetComponent<Sound>().timerMax=maxTimer;
 	}

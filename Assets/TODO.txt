@@ -1,0 +1,13 @@
+Enemies pull you out of lockers if they see you
+generate food drops in crates
+use proper obj for food pickup
+
+place crates properly
+place laser triggers
+place lockers
+show patrol routes?
+left click on crate to open (but takes a while)
+
+finish level by going back to car
+car drive away animation
+car drive in animation

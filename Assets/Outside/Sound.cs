@@ -24,6 +24,7 @@ public class Sound : MonoBehaviour {
 			Destroy (gameObject);
 		}else{
 			radius = (timer / timerMax) * radiusMax;
+			GetComponent<Renderer>().material.SetFloat("_MaxRad",radius/radiusMax);
 			transform.localScale=new Vector3(radius,radius,radius);
 			timer=timer+Time.deltaTime;
 		}

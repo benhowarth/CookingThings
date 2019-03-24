@@ -19,13 +19,10 @@ public class EnemyAI : MonoBehaviour {
 	public bool dead=false;
 	public bool seenPlayer=false;
 	public GameObject Player;
+	public GameObject bloodParticles;
 	public GameObject food;
 	private Vector3 knifeHit;
 	public NavMeshAgent agent;
-
-
-
-	private GameObject visionLight;
 
 	private GameObject viewCone;
 	private Renderer viewConeRenderer;
@@ -49,7 +46,6 @@ public class EnemyAI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Player=GameObject.Find ("Player");
-		visionLight = transform.Find ("Flashlight").gameObject;
 		agent = GetComponent<NavMeshAgent>();
 		agent.destination = transform.position;
 		transform.Find("CubeTop").GetComponent<Renderer> ().material = noAttackMat;
@@ -60,12 +56,10 @@ public class EnemyAI : MonoBehaviour {
 		spawnLoc = new Vector3 (transform.position.x,groundY,transform.position.z);
 		patrolLoc = spawnLoc;
 		searchLoc = spawnLoc;
-		searchStartLoc = spawnLoc;
 		//set up patrol route
 		patrolRouteNo = Random.Range (patrolRouteNoMin, patrolRouteNoMax);
 		GeneratePatrolRoute();
-		GetNewPatrolPoint();
-		state = EnemyState.SEARCH;
+		searchAt (spawnLoc);
 
 	}
 	
@@ -88,6 +82,8 @@ public class EnemyAI : MonoBehaviour {
 						Debug.DrawLine(patrolRoute[i-1], patrolRoute[i], Color.green);
 					}
 					Debug.DrawLine(patrolRoute[patrolRoute.Count-1],patrolRoute[0],Color.green);
+				}else{
+					Debug.Log ("noroute!");
 				}
 			}
 			break;
@@ -98,9 +94,9 @@ public class EnemyAI : MonoBehaviour {
 			}
 
 
-			if(searchTimer<searchTimerMax){
-				searchTimer+=Time.deltaTime;
-				Debug.Log ("search dist: "+Vector3.Distance(transform.position,searchLoc));
+			if(searchTimer>0){
+				searchTimer-=Time.deltaTime;
+				//Debug.Log ("search dist: "+Vector3.Distance(transform.position,searchLoc));
 				if(Vector3.Distance(transform.position,searchLoc)<2.0){
 					//get next search
 					GetNewSearchPoint();
@@ -115,10 +111,7 @@ public class EnemyAI : MonoBehaviour {
 			viewConeRenderer.material=viewConeChaseMat;
 			agent.destination=Player.transform.position;
 			if(!seenPlayer){
-				searchStartLoc=Player.transform.position;
-				searchTimer=0;
-				GetNewSearchPoint();
-				state=EnemyState.SEARCH;
+				searchAt(Player.transform.position);
 			}else if(Vector3.Distance(transform.position,Player.transform.position)<=3){
 				state=EnemyState.ATTACK;
 			}
@@ -129,10 +122,7 @@ public class EnemyAI : MonoBehaviour {
 				if(seenPlayer){
 					state=EnemyState.CHASE;
 				}else{
-					searchStartLoc=Player.transform.position;
-					searchTimer=0;
-					GetNewSearchPoint();
-					state=EnemyState.SEARCH;
+					searchAt(Player.transform.position);
 				}
 			}else{
 				Player.GetComponent<PlayerMovement>().takeDamage (0.7f);
@@ -142,19 +132,6 @@ public class EnemyAI : MonoBehaviour {
 			break;
 		}
 
-		/*
-		if (!dead) {
-			if(seenPlayer){
-				visionLight.GetComponent<Light>().color=Color.red;
-				if(Vector3.Distance(transform.position,Player.transform.position)<2.5){
-					Debug.Log ("Attack player");
-					Player.GetComponent<PlayerMovement>().takeDamage (0.7f);
-				}
-			}else{
-				visionLight.GetComponent<Light>().color=Color.white;
-			}
-		}
-		*/
 	}
 	void GeneratePatrolRoute(){
 		patrolRoute.Clear ();
@@ -170,7 +147,7 @@ public class EnemyAI : MonoBehaviour {
 		//Debug.Log ("Fin");
 	}
 	void GetNewPatrolPoint(){
-		Debug.Log ("Get new patrol point!");
+		//Debug.Log ("Get new patrol point!");
 		if (patrolIndex + 1 < patrolRoute.Count) {
 			patrolIndex++;
 		} else {
@@ -180,7 +157,7 @@ public class EnemyAI : MonoBehaviour {
 		agent.destination = patrolLoc;
 	}
 	void GetNewSearchPoint(){
-		Debug.Log ("Get new search point");
+		//Debug.Log ("Get new search point");
 		bool pointIsObstacle = true;
 		Vector2 offset;
 		Vector3 offset3=Vector3.zero;
@@ -193,6 +170,7 @@ public class EnemyAI : MonoBehaviour {
 		agent.destination = searchLoc;
 	}
 	void SpawnFood(){
+		Instantiate (bloodParticles, transform.position, Quaternion.identity);
 		GameObject foodObj=Instantiate (food, transform);
 		Vector3 foodForce = knifeHit * 250f;
 		foodForce = new Vector3 (foodForce.x, foodForce.y+30f, foodForce.z);
@@ -214,7 +192,6 @@ public class EnemyAI : MonoBehaviour {
 			state=EnemyState.DEAD;
 			viewCone.SetActive(false);
 			GetComponent<Collider> ().enabled = false;
-			transform.Find ("Flashlight").GetComponent<Light> ().enabled = false;
 			transform.Find ("CubeTop").GetComponent<Collider> ().enabled = true;
 			transform.Find ("CubeTop").GetComponent<Rigidbody> ().isKinematic = false;
 			transform.Find ("CubeTop").GetComponent<Rigidbody> ().useGravity = true;
@@ -231,8 +208,6 @@ public class EnemyAI : MonoBehaviour {
 
 			
 			GetComponent<Collider> ().enabled = false;
-			
-			transform.Find ("Vision").GetComponent<Collider> ().enabled = false;
 
 			
 			Invoke ("SpawnFood", 0.2f);
@@ -245,11 +220,12 @@ public class EnemyAI : MonoBehaviour {
 
 	
 	void OnCollisionEnter(Collision col){
-		/*Debug.Log ("enemy enter coll");
+		Debug.Log ("enemy enter coll");
 		
 		if (col.gameObject.tag == "Player") {
-			attackingPlayer=true;
-		}*/
+			seenPlayer=true;
+			state=EnemyState.CHASE;
+		}
 	}
 	void OnCollisionExit(Collision col){
 		/*Debug.Log ("enemy exit coll");
@@ -257,5 +233,11 @@ public class EnemyAI : MonoBehaviour {
 		if (col.gameObject.tag == "Player") {
 			attackingPlayer=false;
 		}*/
+	}
+	public void searchAt(Vector3 pos){
+		searchStartLoc = pos;
+		searchTimer=searchTimerMax+(agent.speed*Vector3.Distance(transform.position,pos))/10;
+		GetNewSearchPoint();
+		state=EnemyState.SEARCH;
 	}
 }

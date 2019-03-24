@@ -10,7 +10,9 @@ public class WorldGen2 : MonoBehaviour {
 	public GameObject RoadTile;
 	public GameObject HouseTile;
 	public GameObject WallObj;
+	public GameObject Crate;
 	public GameObject Enemy;
+	public GameObject LaserTrigger;
 	public int[,] tiles;
 	//public List<List<int[,]>> buildings;
 
@@ -18,6 +20,8 @@ public class WorldGen2 : MonoBehaviour {
 
 	List<Vector2> walkersPos=new List<Vector2>();
 	List<Vector2> walkersDir=new List<Vector2>();
+
+	List<Vector2> deadEnds=new List<Vector2>();
 
 
 	void paintTile(int y,int x){
@@ -128,7 +132,6 @@ public class WorldGen2 : MonoBehaviour {
 				}
 			}
 		}
-
 		/*
 		for (int i=0; i<3; i++) {
 			for (int y=3; y<gridSize; y++) {
@@ -209,14 +212,33 @@ public class WorldGen2 : MonoBehaviour {
 				}
 			}
 		}
+		for (int y=1; y<gridSize-1; y++) {
+			for (int x=1; x<gridSize-1; x++) {
+				if(tiles[y,x]==0 && ((tiles[y+1,x]==1&&tiles[y-1,x]==1)||(tiles[y,x+1]==1&&tiles[y,x-1]==1))){
+					if(Random.Range(0f,1f)>0.00){
+						Debug.Log("new laser boi!");
+						Vector3 laserPos=new Vector3(transform.position.x+x*tileSize,transform.position.y+3f,transform.position.z+y*tileSize);
+						Instantiate(LaserTrigger,laserPos,Quaternion.identity);
+					}
+				}
+			}
+		}
+
 		for (int y=0; y<gridSize; y++) {
 			for (int x=0; x<gridSize; x++) {
 				//if above (1,1) and is a road tile 
 				if(x>1 && y>1 && tiles[y,x]==1 && Random.Range (0f,1f)>0.96){
 					Vector3 enemyTransformPosition=new Vector3(transform.position.x+x*tileSize,transform.position.y+3f,transform.position.z+y*tileSize);
-					GameObject enemyInstance=Instantiate(Enemy,enemyTransformPosition,Quaternion.identity);
+					Instantiate(Enemy,enemyTransformPosition,Quaternion.identity);
 				}
 			}
 		}
+
+		
+		
+		for (int i=0; i<walkersPos.Count; i++) {
+			Instantiate(Crate,new Vector3(transform.position.x+(walkersPos[i].x-walkersDir[i].x)*tileSize,transform.position.y+4,transform.position.z+(walkersPos[i].y-walkersDir[i].y)*tileSize),Quaternion.Euler (0,0,0));
+		}
+
 	}
 }

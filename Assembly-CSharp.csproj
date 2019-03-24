@@ -65,9 +65,13 @@
      <Compile Include="Assets\Cafeteria\Pan.cs" />
      <Compile Include="Assets\Cafeteria\toggleSlicer.cs" />
      <Compile Include="Assets\CitizenManager.cs" />
+     <Compile Include="Assets\CursorLoading.cs" />
+     <Compile Include="Assets\DestroyAfter.cs" />
      <Compile Include="Assets\DinnerBell.cs" />
      <Compile Include="Assets\FieldOfView.cs" />
      <Compile Include="Assets\IngredientInfo.cs" />
+     <Compile Include="Assets\LaserTrigger.cs" />
+     <Compile Include="Assets\Locker.cs" />
      <Compile Include="Assets\Not My Assets\BzKovSoft\CharacterSlicerSamples\CharacterSlicerSampleFast.cs" />
      <Compile Include="Assets\Not My Assets\BzKovSoft\CharacterSlicerSamples\EnemyManager.cs" />
      <Compile Include="Assets\Not My Assets\BzKovSoft\CharacterSlicerSamples\IDeadable.cs" />
@@ -108,7 +112,14 @@
      <None Include="Assets\Cafeteria\Citizen\names.txt" />
      <None Include="Assets\Not My Assets\OutlineEffect\Resources\OutlineShader.shader" />
      <None Include="Assets\Not My Assets\OutlineEffect\Resources\OutlineBufferShader.shader" />
+     <None Include="Assets\Outside\WallShader.shader" />
+     <None Include="Assets\Materials\SoundShader.shader" />
+     <None Include="Assets\Materials\SoundShader4.shader" />
+     <None Include="Assets\Materials\SoundShader2.shader" />
+     <None Include="Assets\TODO.txt" />
      <None Include="Assets\Objs\Creds.txt" />
+     <None Include="Assets\XRayShader.shader" />
+     <None Include="Assets\Materials\SoundShader3.shader" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Unity5/Projects/CookingThings/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
