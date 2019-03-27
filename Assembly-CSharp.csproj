@@ -92,6 +92,8 @@
      <Compile Include="Assets\Not My Assets\OutlineEffect\Outline.cs" />
      <Compile Include="Assets\Not My Assets\OutlineEffect\OutlineEffect.cs" />
      <Compile Include="Assets\Not My Assets\Standard Assets\Utility\DragRigidbody.cs" />
+     <Compile Include="Assets\NotificationSpawner.cs" />
+     <Compile Include="Assets\NotificationUI.cs" />
      <Compile Include="Assets\Outside\Crate.cs" />
      <Compile Include="Assets\Outside\DeleteProp.cs" />
      <Compile Include="Assets\Outside\deleteWallOnGen.cs" />

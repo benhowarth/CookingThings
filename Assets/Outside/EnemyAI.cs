@@ -220,7 +220,7 @@ public class EnemyAI : MonoBehaviour {
 
 	
 	void OnCollisionEnter(Collision col){
-		Debug.Log ("enemy enter coll");
+		//Debug.Log ("enemy enter coll");
 		
 		if (col.gameObject.tag == "Player") {
 			seenPlayer=true;

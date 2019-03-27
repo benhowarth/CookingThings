@@ -10,5 +10,10 @@ public class IngredientInfo : ScriptableObject {
 	public float disease;
 	public float vitamins;
 	public float energy;
+	public Mesh mesh;
+	public Texture textureAlbedo;
+	public Texture textureNormal;
+	public Color color;
+	public float pickupScale=1f;
 	public List<string> tags;
 }

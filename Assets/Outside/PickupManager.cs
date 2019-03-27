@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PickupManager : MonoBehaviour {
 	public List<int> pickupsCollected;
+	public List<IngredientInfo> ingredients;
 	public SceneChanger sc;
 
 	public void Pickup(int pickupId){
@@ -13,6 +14,10 @@ public class PickupManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
+	}
+
+	public IngredientInfo GetRandomIngredient(){
+		return ingredients[Random.Range (0, ingredients.Count)];
 	}
 	
 	// Update is called once per frame

@@ -13,20 +13,35 @@ public class PlayerMovement : MonoBehaviour {
 	public bool dead;
 	private float healthRegenGap;
 	public float healthRegenGapMax=50.0f;
+
 	public GameObject SoundManager;
+
 	public Collider playerCol;
 	public GameObject playerModel;
 	public Animator anim;
+
 	public GameObject knifeObj;
 	public Collider knifeCol;
 	private Rigidbody rb;
+
 	public Image HPBar;
+
+
 	public float footStepTimer;
 	public float footStepTimerMax=0.5f;
+
 	public bool hidden=false;
 	public bool canUnhide=false;
 	public GameObject currentLocker;
+
+
 	public GameObject foodPickupHoverOver;
+	public GameObject crateHoverOver;
+	public float crateOpenAmount;
+
+	public GameObject CursorLoading;
+	public GameObject pickupTooltip;
+	public Text pickupTooltipText;
 
 	// Use this for initialization
 	void Start () {
@@ -41,8 +56,10 @@ public class PlayerMovement : MonoBehaviour {
 
 		footStepTimer = -1;
 		anim.SetBool ("dead",false);
-
+		
 		foodPickupHoverOver = null;
+		crateHoverOver = null;
+		crateOpenAmount = 0f;
 	}
 	
 	// Update is called once per frame
@@ -52,19 +69,47 @@ public class PlayerMovement : MonoBehaviour {
 			Vector3 mPos = Input.mousePosition;
 			RaycastHit hit;
 			Ray camRay = cam.ScreenPointToRay (mPos);
-			if (Physics.Raycast (camRay, out hit, Mathf.Infinity, LayerMask.GetMask ("foodPickup", "Ground"))) {
+			if (Physics.Raycast (camRay, out hit, Mathf.Infinity, LayerMask.GetMask ("foodPickup","Crate","Ground"))) {
 				Vector3 aimPos = new Vector3 (hit.point.x, transform.Find ("PlayerModel").position.y, hit.point.z);
 				transform.Find ("PlayerModel").LookAt (aimPos);
+				Debug.Log ("Hover"+hit.transform.gameObject);
 				if (hit.transform.gameObject.tag == "foodPickup") {
 					if(foodPickupHoverOver==null || foodPickupHoverOver!=hit.transform.gameObject){
 						foodPickupHoverOver=hit.transform.gameObject;
 					}
-					if (Input.GetMouseButtonDown (0) || Input.GetKey (KeyCode.E)) {
+					if (Input.GetMouseButton (0) || Input.GetKey (KeyCode.E)) {
 						hit.transform.gameObject.GetComponent<FoodPickup> ().Pickup ();
 					}
+					crateOpenAmount=0f;
+				}else if(hit.transform.gameObject.tag=="Crate"){
+					if(hit.transform.gameObject==crateHoverOver){
+						if (Input.GetMouseButton (0) || Input.GetKey (KeyCode.E)) {
+							Debug.Log ("Crate open amount:"+crateOpenAmount);
+							crateOpenAmount+=crateHoverOver.GetComponent<Crate>().openSpeed*Time.deltaTime;
+							if(crateOpenAmount>=1){
+								crateHoverOver.GetComponent<Crate>().Smash (1f);
+								crateOpenAmount=0f;
+							}
+						}
+					}else{
+						crateOpenAmount=0f;
+						crateHoverOver=hit.transform.gameObject;
+					}
+					foodPickupHoverOver=null;
 				}else{
+					crateOpenAmount=0f;
+					crateHoverOver=null;
 					foodPickupHoverOver=null;
 				}
+				CursorLoading.GetComponent<CursorLoading>().setPerc(crateOpenAmount);
+			}
+
+			if(foodPickupHoverOver){
+				pickupTooltip.SetActive(true);
+				pickupTooltip.transform.position = Input.mousePosition;
+				pickupTooltipText.text=foodPickupHoverOver.GetComponent<FoodPickup>().GetInfoString();
+			}else{
+				pickupTooltip.SetActive(false);
 			}
 
 

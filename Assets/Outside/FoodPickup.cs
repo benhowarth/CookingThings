@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FoodPickup : MonoBehaviour {
-	public bool toolTipOn;
 	private Camera cam;
 	public IngredientInfo info;
+	public PickupManager pm;
+	public NotificationSpawner NS;
 	// Use this for initialization
 	void Start () {
 		cam = Camera.main;
-		toolTipOn=false;
+		pm = GameObject.Find ("PickupManager").GetComponent<PickupManager> ();
+		NS = GameObject.Find ("NotificationSpawner").GetComponent<NotificationSpawner> ();
+	}
+
+	public void LoadFromInfo(){
+		GetComponent<MeshFilter>().mesh = info.mesh;
+		GetComponent<MeshRenderer> ().material.mainTexture = info.textureAlbedo;
+		GetComponent<MeshRenderer> ().material.SetTexture("_BumpMap",info.textureNormal);
+		transform.localScale = new Vector3 (info.pickupScale, info.pickupScale, info.pickupScale);
 	}
 	
 	// Update is called once per frame
@@ -18,9 +27,9 @@ public class FoodPickup : MonoBehaviour {
 	}
 
 	public void Pickup(){
-		Debug.Log ("Picked Up "+info.name+"!");
-		GameObject pm=GameObject.Find ("PickupManager");
-		pm.GetComponent<PickupManager>().Pickup(info.id);
+		//Debug.Log ("Picked Up "+info.name+"!");
+		pm.Pickup(info.id);
+		NS.SpawnNotification ("+" + info.name, info.color);
 		Destroy (transform.gameObject);
 	}
 
@@ -30,10 +39,8 @@ public class FoodPickup : MonoBehaviour {
 			Destroy (gameObject);
 		}*/
 	}
-	void OnGUI(){
-		if (toolTipOn) {
-			Vector3 mousePos=Input.mousePosition;
-			//GUI.Label (new Rect(mousePos.x,Screen.height-mousePos.y,300,100),info.name+"\nEnergy:"+info.energy+"\nVitamins:"+info.vitamins+"\nDisease:"+info.vitamins);
-		}
+
+	public string GetInfoString(){
+		return (info.name+"\nEnergy:"+info.energy+"\nVitamins:"+info.vitamins+"\nDisease:"+info.disease);
 	}
 }
