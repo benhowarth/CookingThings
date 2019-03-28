@@ -1,23 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Outside\KnifeAttack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FieldOfView.cs">
     <Files>
-      <File FileName="Assets\SceneChanger.cs" Line="1" Column="1" />
-      <File FileName="Assets\Outside\EnemyAI.cs" Line="216" Column="22" />
-      <File FileName="Assets\Outside\Crate.cs" Line="17" Column="3" />
-      <File FileName="Assets\Outside\PlayerMovement.cs" Line="210" Column="3" />
-      <File FileName="Assets\Outside\EnemyVision.cs" Line="1" Column="1" />
-      <File FileName="Assets\FieldOfView.cs" Line="1" Column="1" />
-      <File FileName="Assets\LaserTrigger.cs" Line="35" Column="3" />
-      <File FileName="Assets\Outside\KnifeAttack.cs" Line="7" Column="32" />
-      <File FileName="Assets\Locker.cs" Line="29" Column="48" />
-      <File FileName="Assets\Outside\SoundManager.cs" Line="19" Column="3" />
-      <File FileName="Assets\WorldGen2.cs" Line="232" Column="6" />
-      <File FileName="Assets\DestroyAfter.cs" Line="10" Column="9" />
-      <File FileName="Assets\TODO.txt" Line="13" Column="23" />
-      <File FileName="Assets\Outside\PickupManager.cs" Line="20" Column="34" />
-      <File FileName="Assets\Outside\FoodPickup.cs" Line="17" Column="3" />
-      <File FileName="Assets\CursorLoading.cs" Line="29" Column="9" />
+      <File FileName="Assets\Outside\PickupManager.cs" Line="10" Column="85" />
+      <File FileName="Assets\Outside\PlayerMovement.cs" Line="272" Column="36" />
+      <File FileName="Assets\Outside\FoodPickup.cs" Line="14" Column="62" />
+      <File FileName="Assets\CursorLoading.cs" Line="36" Column="25" />
+      <File FileName="Assets\NotificationUI.cs" Line="30" Column="22" />
+      <File FileName="Assets\NotificationSpawner.cs" Line="8" Column="36" />
+      <File FileName="Assets\IngredientInfo.cs" Line="11" Column="35" />
+      <File FileName="Assets\Outside\Crate.cs" Line="74" Column="41" />
+      <File FileName="Assets\PlayerGrab.cs" Line="94" Column="53" />
+      <File FileName="Assets\Outside\EnemyAI.cs" Line="61" Column="24" />
+      <File FileName="Assets\Outside\KnifeAttack.cs" Line="56" Column="26" />
+      <File FileName="Assets\FieldOfView.cs" Line="10" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -109,6 +109,7 @@
      <Compile Include="Assets\Outside\Sound.cs" />
      <Compile Include="Assets\Outside\SoundManager.cs" />
      <Compile Include="Assets\Outside\WorldGen.cs" />
+     <Compile Include="Assets\PlayerGrab.cs" />
      <Compile Include="Assets\SceneChanger.cs" />
      <Compile Include="Assets\WorldGen2.cs" />
      <None Include="Assets\Cafeteria\Citizen\names.txt" />

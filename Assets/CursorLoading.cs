@@ -9,23 +9,31 @@ public class CursorLoading : MonoBehaviour {
 	public Image cursorImage;
 	public Color color0;
 	public Color color1;
-	// Use this for initialization
+
+
 	void Start () {
+		//hide cursor at beginning
 		cursorPerc = 0;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
+		//if cursor has some fill
 		if (cursorPerc>0) {
+			//follow the cursor
 			transform.position = Input.mousePosition;
 		}
 	}
+
 	public void setPerc(float perc){
 		//cursorPerc should only be set between 1 and 0
 		cursorPerc = Mathf.Clamp (perc, 0, 1);
+		//set fill amount with given percentage
 		cursorImage.fillAmount=cursorPerc;
+		//set color (lerped using percentage given)
 		cursorImage.color = Color.Lerp (color0, color1, cursorPerc);
 	}
+
+	//for hiding the cursor
 	public void disable(){
 		cursorPerc = 0;
 	}

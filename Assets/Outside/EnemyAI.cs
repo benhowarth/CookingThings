@@ -8,6 +8,7 @@ public enum EnemyState{
 	SEARCH,
 	CHASE,
 	ATTACK,
+	STUNNED,
 	DEAD
 };
 
@@ -43,7 +44,9 @@ public class EnemyAI : MonoBehaviour {
 	public int patrolIndex=0;
 	public LayerMask patrolObstacleMask;
 
-	// Use this for initialization
+	public GameObject fov;
+
+
 	void Start () {
 		Player=GameObject.Find ("Player");
 		agent = GetComponent<NavMeshAgent>();
@@ -62,8 +65,8 @@ public class EnemyAI : MonoBehaviour {
 		searchAt (spawnLoc);
 
 	}
-	
-	// Update is called once per frame
+
+
 	void Update () {
 
 		switch (state) {
@@ -133,6 +136,19 @@ public class EnemyAI : MonoBehaviour {
 		}
 
 	}
+
+	void Unstun(){
+		searchAt (transform.position);
+		fov.SetActive(true);
+	}
+
+	public void Stun(float time){
+		state = EnemyState.STUNNED;
+		agent.destination = transform.position;
+		fov.SetActive(false);
+		Invoke ("Unstun", time);
+	}
+
 	void GeneratePatrolRoute(){
 		patrolRoute.Clear ();
 		//Debug.Log ("Generating patrol route!");
@@ -146,6 +162,7 @@ public class EnemyAI : MonoBehaviour {
 		}
 		//Debug.Log ("Fin");
 	}
+
 	void GetNewPatrolPoint(){
 		//Debug.Log ("Get new patrol point!");
 		if (patrolIndex + 1 < patrolRoute.Count) {
@@ -156,6 +173,7 @@ public class EnemyAI : MonoBehaviour {
 		patrolLoc=patrolRoute[patrolIndex];
 		agent.destination = patrolLoc;
 	}
+
 	void GetNewSearchPoint(){
 		//Debug.Log ("Get new search point");
 		bool pointIsObstacle = true;
@@ -169,13 +187,16 @@ public class EnemyAI : MonoBehaviour {
 		searchLoc=searchStartLoc+offset3;
 		agent.destination = searchLoc;
 	}
+
 	void SpawnFood(){
 		Instantiate (bloodParticles, transform.position, Quaternion.identity);
 		GameObject foodObj=Instantiate (food, transform);
+		foodObj.GetComponent<FoodPickup> ().LoadFromInfo ();
 		Vector3 foodForce = knifeHit * 250f;
 		foodForce = new Vector3 (foodForce.x, foodForce.y+30f, foodForce.z);
 		foodObj.GetComponent<Rigidbody>().AddForce(foodForce);
 	}
+
 	bool IsPointObstacle(Vector3 pos){
 		RaycastHit hit;
 		Vector3 newPos = pos;
@@ -186,6 +207,7 @@ public class EnemyAI : MonoBehaviour {
 			return false;
 		}
 	}
+
 	void OnTriggerEnter(Collider col){
 		if (col.gameObject.name == "Knife") {
 			dead = true;
@@ -219,21 +241,15 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	
-	void OnCollisionEnter(Collision col){
-		//Debug.Log ("enemy enter coll");
-		
-		if (col.gameObject.tag == "Player") {
+	void OnCollisionEnter(Collision col){		
+		if (col.gameObject.tag == "Player" && !col.gameObject.GetComponent<PlayerMovement>().hidden) {
 			seenPlayer=true;
 			state=EnemyState.CHASE;
+		}else if (col.gameObject.tag == "Crate" && col.impulse.magnitude>2f) {
+			Stun(2f);
 		}
 	}
-	void OnCollisionExit(Collision col){
-		/*Debug.Log ("enemy exit coll");
-		
-		if (col.gameObject.tag == "Player") {
-			attackingPlayer=false;
-		}*/
-	}
+
 	public void searchAt(Vector3 pos){
 		searchStartLoc = pos;
 		searchTimer=searchTimerMax+(agent.speed*Vector3.Distance(transform.position,pos))/10;

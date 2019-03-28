@@ -15,31 +15,24 @@ public class FoodPickup : MonoBehaviour {
 	}
 
 	public void LoadFromInfo(){
+		//load mesh, texture and scale from ingredientinfo
 		GetComponent<MeshFilter>().mesh = info.mesh;
 		GetComponent<MeshRenderer> ().material.mainTexture = info.textureAlbedo;
 		GetComponent<MeshRenderer> ().material.SetTexture("_BumpMap",info.textureNormal);
 		transform.localScale = new Vector3 (info.pickupScale, info.pickupScale, info.pickupScale);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
 
 	public void Pickup(){
-		//Debug.Log ("Picked Up "+info.name+"!");
+		//send pickup to pickup manager
 		pm.Pickup(info.id);
+		//spawn notification at bottom of screen (e.g. "+Beef")
 		NS.SpawnNotification ("+" + info.name, info.color);
+		//destroy pickup gameobject
 		Destroy (transform.gameObject);
 	}
 
-	void onCollisionEnter(Collision col){
-		/*Debug.Log (col);
-		if (col.gameObject.name == "Player") {
-			Destroy (gameObject);
-		}*/
-	}
 
+	//for sending information from ingredientinfo to tooltip in PlayerMovement.cs
 	public string GetInfoString(){
 		return (info.name+"\nEnergy:"+info.energy+"\nVitamins:"+info.vitamins+"\nDisease:"+info.disease);
 	}

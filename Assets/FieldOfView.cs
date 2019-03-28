@@ -104,7 +104,7 @@ public class FieldOfView : MonoBehaviour {
 				float distToTarget=Vector3.Distance(transform.position,target.position);
 				if(!Physics.Raycast(transform.position,dirToTarget,distToTarget,obstacleMask)){
 					visibleTargets.Add (target);
-					if(target.gameObject.tag=="Player" && !target.GetComponent<PlayerMovement>().hidden){playerInVision=true;}
+					if(target.gameObject.tag=="Player" && (!target.GetComponent<PlayerMovement>().hidden||target.GetComponent<PlayerMovement>().canBeSeenStartingHide)){playerInVision=true;}
 				}
 			}
 		}
