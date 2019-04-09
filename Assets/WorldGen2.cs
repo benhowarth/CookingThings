@@ -13,8 +13,14 @@ public class WorldGen2 : MonoBehaviour {
 	public GameObject Crate;
 	public GameObject Enemy;
 	public GameObject LaserTrigger;
+	public GameObject Locker;
 	public int[,] tiles;
-	//public List<List<int[,]>> buildings;
+	
+	public int walkerLim = 4;
+	public int walkerBrushSizeMin=0;
+	public int walkerBrushSizeMax=2;
+	public float newWalkerChance=0.1f;
+	public int genSteps=20;
 
 
 
@@ -110,14 +116,16 @@ public class WorldGen2 : MonoBehaviour {
 			}
 		}
 
-
-		int walkerLim = 15;
 		walkersPos.Add (new Vector2(3,3));
 		walkersDir.Add (new Vector2 (1, 0));
-		for (int i=0; i<70; i++) {
+		for (int i=0; i<genSteps; i++) {
 			for(int j=0;j<walkersPos.Count;j++){
 				Vector2 wPos=walkersPos[j];
-				paintTiles((int)wPos.y,(int)wPos.x,Random.Range(0,Random.Range (0,Random.Range(1,2))));
+				//paintTiles((int)wPos.y,(int)wPos.x,Random.Range(0,Random.Range (0,Random.Range(1,2))));
+				int currentBrushSize=Random.Range(walkerBrushSizeMin,walkerBrushSizeMax);
+				paintTiles((int)wPos.y,(int)wPos.x,currentBrushSize);
+
+
 				if(Random.Range (0f,1f)>0.5){
 					if(Random.Range (0f,1f)>0.5){
 						walkersDir[j]=new Vector2(0,1);
@@ -126,7 +134,7 @@ public class WorldGen2 : MonoBehaviour {
 					}
 				}
 				walkersPos[j]=wPos+walkersDir[j];
-				if(Random.Range (0f,1f)>0.8 && walkersPos.Count<walkerLim){
+				if(Random.Range (0f,1f)>newWalkerChance && walkersPos.Count<walkerLim){
 					walkersPos.Add (new Vector2(walkersPos[j].x,walkersPos[j].y));
 					walkersDir.Add (new Vector2(walkersDir[j].x,walkersDir[j].y)*-1);
 				}
@@ -227,18 +235,27 @@ public class WorldGen2 : MonoBehaviour {
 		for (int y=0; y<gridSize; y++) {
 			for (int x=0; x<gridSize; x++) {
 				//if above (1,1) and is a road tile 
-				if(x>1 && y>1 && tiles[y,x]==1 && Random.Range (0f,1f)>0.96){
-					Vector3 enemyTransformPosition=new Vector3(transform.position.x+x*tileSize,transform.position.y+3f,transform.position.z+y*tileSize);
-					Instantiate(Enemy,enemyTransformPosition,Quaternion.identity);
+				if(x>1 && y>1 && tiles[y,x]==1){
+					Vector3 objTransformPosition=new Vector3(transform.position.x+x*tileSize,transform.position.y+1.5f,transform.position.z+y*tileSize);
+					if(Random.Range (0f,1f)>0.96){
+						Instantiate(Enemy,objTransformPosition,Quaternion.identity);
+					}else if(Random.Range (0f,1f)>0.94){
+						Instantiate(Crate,objTransformPosition,Quaternion.identity);
+					}else if(Random.Range (0f,1f)>0.9399999){
+						Instantiate(LaserTrigger,objTransformPosition,Quaternion.identity);
+					}else if(Random.Range (0f,1f)>0.93999989999999){
+						Instantiate(Locker,objTransformPosition,Quaternion.identity);
+					}
 				}
 			}
 		}
 
 		
-		
+		/*
 		for (int i=0; i<walkersPos.Count; i++) {
 			Instantiate(Crate,new Vector3(transform.position.x+(walkersPos[i].x-walkersDir[i].x)*tileSize,transform.position.y+4,transform.position.z+(walkersPos[i].y-walkersDir[i].y)*tileSize),Quaternion.Euler (0,0,0));
 		}
+		*/
 
 	}
 }

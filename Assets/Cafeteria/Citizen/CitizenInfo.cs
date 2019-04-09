@@ -18,6 +18,7 @@ public class CitizenInfo : ScriptableObject {
 	public float eyeSpacingY;
 	public float eyeSpacingX;
 	public float healthLevel;
+	public float energyLevel;
 	public int job;
 	public void Print(){
 		Debug.Log (name);

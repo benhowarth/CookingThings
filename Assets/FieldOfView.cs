@@ -105,6 +105,7 @@ public class FieldOfView : MonoBehaviour {
 				if(!Physics.Raycast(transform.position,dirToTarget,distToTarget,obstacleMask)){
 					visibleTargets.Add (target);
 					if(target.gameObject.tag=="Player" && (!target.GetComponent<PlayerMovement>().hidden||target.GetComponent<PlayerMovement>().canBeSeenStartingHide)){playerInVision=true;}
+					//else if(target.gameObject.tag=="Crate"){ai.searchAt(target.position);}
 				}
 			}
 		}

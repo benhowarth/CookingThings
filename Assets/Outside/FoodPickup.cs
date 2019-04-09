@@ -8,7 +8,7 @@ public class FoodPickup : MonoBehaviour {
 	public PickupManager pm;
 	public NotificationSpawner NS;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		cam = Camera.main;
 		pm = GameObject.Find ("PickupManager").GetComponent<PickupManager> ();
 		NS = GameObject.Find ("NotificationSpawner").GetComponent<NotificationSpawner> ();
@@ -34,6 +34,6 @@ public class FoodPickup : MonoBehaviour {
 
 	//for sending information from ingredientinfo to tooltip in PlayerMovement.cs
 	public string GetInfoString(){
-		return (info.name+"\nEnergy:"+info.energy+"\nVitamins:"+info.vitamins+"\nDisease:"+info.disease);
+		return (info.name+"\nEnergy:"+info.energy+"\nDisease:"+info.disease);
 	}
 }

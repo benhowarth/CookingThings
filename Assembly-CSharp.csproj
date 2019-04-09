@@ -59,11 +59,15 @@
      <Compile Include="Assets\Cafeteria\Citizen\planeTextureChooser.cs" />
      <Compile Include="Assets\Cafeteria\Cookable.cs" />
      <Compile Include="Assets\Cafeteria\FoodManager.cs" />
+     <Compile Include="Assets\Cafeteria\FoodManager2.cs" />
      <Compile Include="Assets\Cafeteria\Hotplate.cs" />
      <Compile Include="Assets\Cafeteria\Ingredient.cs" />
      <Compile Include="Assets\Cafeteria\InventoryButton.cs" />
      <Compile Include="Assets\Cafeteria\Pan.cs" />
+     <Compile Include="Assets\Cafeteria\RecipeButton.cs" />
+     <Compile Include="Assets\Cafeteria\RecipeInfo.cs" />
      <Compile Include="Assets\Cafeteria\toggleSlicer.cs" />
+     <Compile Include="Assets\carChangeScene.cs" />
      <Compile Include="Assets\CitizenManager.cs" />
      <Compile Include="Assets\CursorLoading.cs" />
      <Compile Include="Assets\DestroyAfter.cs" />

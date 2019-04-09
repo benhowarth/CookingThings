@@ -7,6 +7,6 @@ public class DinnerBell : MonoBehaviour {
 	public GameObject FoodManager;
 
 	void OnMouseDown(){
-		FoodManager.GetComponent<FoodManager> ().Serve ();
+		FoodManager.GetComponent<FoodManager2> ().nextOrder ();
 	}
 }

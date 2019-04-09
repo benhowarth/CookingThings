@@ -10,7 +10,6 @@ public class IngredientInfo : ScriptableObject {
 	public int id;
 	//stats for citizen's health etc.
 	public float disease;
-	public float vitamins;
 	public float energy;
 	//for foodpickup
 	public Mesh mesh;

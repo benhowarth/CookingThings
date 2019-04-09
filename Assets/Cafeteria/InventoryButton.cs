@@ -16,6 +16,6 @@ public class InventoryButton : MonoBehaviour {
 	}
 
 	void CustomClick(int id){
-		GameObject.Find ("Food Manager").gameObject.GetComponent<FoodManager> ().spawnIngredient (id);
+		//GameObject.Find ("Food Manager").gameObject.GetComponent<FoodManager> ().spawnIngredient (id);
 	}
 }

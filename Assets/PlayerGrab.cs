@@ -30,6 +30,8 @@ public class PlayerGrab : MonoBehaviour {
 			grabbableObj.gameObject.GetComponent<Rigidbody>().isKinematic=true;
 			grabbableObj.gameObject.GetComponent<Rigidbody>().useGravity=false;
 			grabbableObj.transform.SetParent(transform);
+			//disable the minimap icon when something is picked up
+			grabbableObj.GetComponent<Crate>().miniIcon.SetActive(false);
 			//player can't attack when holding something
 			knife.knifeEnabled=false;
 		}
@@ -50,6 +52,7 @@ public class PlayerGrab : MonoBehaviour {
 		//complete dropping of object
 		grabbableObj.gameObject.GetComponent<Collider>().isTrigger=false;
 		transform.GetChild(0).SetParent(null);
+		grabbableObj.GetComponent<Crate>().miniIcon.SetActive(true);
 		grabbableObj=null;
 
 		//reenable knife attack

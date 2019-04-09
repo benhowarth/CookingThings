@@ -18,6 +18,7 @@ public class KnifeAttack : MonoBehaviour {
 	void Start () {
 		GetComponent<Collider>().enabled=false;
 		reloaded = true;
+		reloadTimer = reloadTime;
 	}
 
 	//disable hurtbox
@@ -31,6 +32,7 @@ public class KnifeAttack : MonoBehaviour {
 
 
 	void FixedUpdate () {
+		KnifeBar.fillAmount=reloadTimer/reloadTime;
 		//if knife has charge
 		if (reloaded) {
 			//if can attack and press attack button
@@ -55,7 +57,6 @@ public class KnifeAttack : MonoBehaviour {
 		} else {
 			//keep reloading knife
 			reloadTimer+=Time.deltaTime;
-			KnifeBar.fillAmount=reloadTimer/reloadTime;
 		}
 	}
 

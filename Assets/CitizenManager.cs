@@ -37,7 +37,7 @@ public class CitizenManager : MonoBehaviour {
 		if (PlayerPrefs.HasKey ("citNo")) {
 			//load data
 			loadCits();
-		//else
+		//if no save data (new game)
 		} else {
 			//gen data
 			genCits (5);
@@ -51,9 +51,12 @@ public class CitizenManager : MonoBehaviour {
 		
 		for (int i=0; i<citNo; i++) {
 			CitizenInfo newCitizen = ScriptableObject.CreateInstance<CitizenInfo> ();
-
+			
 			newCitizen.name= PlayerPrefs.GetString("cit"+i+"name");
 			
+			newCitizen.healthLevel= PlayerPrefs.GetFloat("cit"+i+"healthLevel");
+			newCitizen.energyLevel= PlayerPrefs.GetFloat("cit"+i+"energyLevel");
+
 			newCitizen.headColorVal=PlayerPrefs.GetFloat("cit"+i+"headColor");
 			newCitizen.headColor = Color.Lerp (minHeadColor, maxHeadColor, newCitizen.headColorVal);
 			newCitizen.headTexture = PlayerPrefs.GetInt("cit"+i+"headTexture");
@@ -79,13 +82,15 @@ public class CitizenManager : MonoBehaviour {
 		}
 	}
 
-	void saveCits(){
+	public void saveCits(){
 
 
 		//clear cits in player prefs
 		int citNo = PlayerPrefs.GetInt("citNo");
 		for (int i=0; i<citNo; i++) {
 			PlayerPrefs.DeleteKey("cit"+i+"name");
+			PlayerPrefs.DeleteKey("cit"+i+"healthLevel");
+			PlayerPrefs.DeleteKey("cit"+i+"energyLevel");
 			
 			
 			
@@ -111,8 +116,11 @@ public class CitizenManager : MonoBehaviour {
 			CitizenInfo newCitizen = cits[i];
 			
 			PlayerPrefs.SetString("cit"+i+"name",newCitizen.name);
-			
-			
+			//Debug.Log ("Saving "+newCitizen.name+" local hp is "+newCitizen.healthLevel);
+			PlayerPrefs.SetFloat("cit"+i+"healthLevel",newCitizen.healthLevel);
+			//Debug.Log ("Saved "+newCitizen.name+" saved hp is "+PlayerPrefs.GetFloat("cit"+i+"healthLevel"));
+			PlayerPrefs.SetFloat("cit"+i+"energyLevel",newCitizen.energyLevel);
+
 			
 			PlayerPrefs.SetFloat("cit"+i+"headColor",newCitizen.headColorVal);
 			PlayerPrefs.SetFloat("cit"+i+"bodyColor",newCitizen.bodyColorVal);
@@ -147,6 +155,9 @@ public class CitizenManager : MonoBehaviour {
 		//setName
 		newCitizen.name= names[Random.Range (0, names.Length)]+" "+alphabet[Random.Range(0,alphabet.Length)]+".";
 
+		newCitizen.healthLevel = 1;
+		newCitizen.energyLevel = 1;
+
 		newCitizen.headColorVal =  Random.Range (0.0f, 1.0f);
 		newCitizen.headColor = Color.Lerp (minHeadColor, maxHeadColor, newCitizen.headColorVal);
 		newCitizen.headTexture = (int) Random.Range (0, headTextures.Count);
@@ -171,13 +182,25 @@ public class CitizenManager : MonoBehaviour {
 		cits.Add(newCitizen);
 	}
 
+	void changeCitInfo(){
+		citScript.info=cits[currentCit];
+		citScript.updateFromInfo();
+	}
+
 	public bool nextCitizen(){
+
+		if (currentCit > -1) {
+			//save all changes to citizens
+			saveCits ();
+			cits[currentCit].healthLevel*=0.9f;
+			cits[currentCit].energyLevel*=0.9f;
+		}
 		currentCit++;
 		if (currentCit < cits.Count) {
 			Debug.Log("Next Citizen");
 			cits[currentCit].Print();
-			citScript.info=cits[currentCit];
-			citScript.updateFromInfo();
+			citScript.anim.SetTrigger("Leave");
+			Invoke ("changeCitInfo",0.5f);
 			return true;
 		} else {
 			Debug.Log ("End of citizen list");

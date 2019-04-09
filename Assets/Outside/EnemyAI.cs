@@ -13,7 +13,7 @@ public enum EnemyState{
 };
 
 public class EnemyAI : MonoBehaviour {
-	
+
 	public Material noAttackMat;
 	public Material attackMat;
 	public float speed=2.0f;
